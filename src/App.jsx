@@ -10,9 +10,10 @@ const App = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [unit, setUnit] = useState('C'); 
 
   useEffect(() => {
-    fetchWeatherAndForecast('Helsinki'); // Initial fetch with default location
+    fetchWeatherAndForecast('Helsinki'); 
   }, []);
 
   const fetchWeatherAndForecast = async (location) => {
@@ -77,11 +78,18 @@ const App = () => {
       {weatherData && (
         <CurrentWeather
           weatherData={weatherData}
+          unit={unit} 
           onSearchClick={handleSearchClick}
           onGeoLocate={handleGeoLocate}
         />
       )}
-      {forecastData && <Forecast forecastData={forecastData} />}
+      {forecastData && (
+        <Forecast
+          forecastData={forecastData}
+          unit={unit} 
+          setUnit={setUnit} 
+        />
+      )}
       {weatherData && <Highlights weatherData={weatherData} />}
       {isModalOpen && <Modal onClose={handleModalClose} onSearch={handleSearch} />}
     </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { getWeatherImage } from '../utils/weatherImages';
 
-const CurrentWeather = ({ weatherData, onSearchClick, onGeoLocate }) => {
+const CurrentWeather = ({ weatherData, onSearchClick, onGeoLocate, unit }) => {
   const weatherMain = weatherData.weather[0].main;
   const today = new Date().toLocaleDateString();
 
@@ -28,7 +28,6 @@ const CurrentWeather = ({ weatherData, onSearchClick, onGeoLocate }) => {
           style={{
             backgroundImage: `url(${getWeatherImage('background')})`,
             backgroundSize: 'cover',
-           
           }}
         ></div>
         <img 
@@ -36,7 +35,7 @@ const CurrentWeather = ({ weatherData, onSearchClick, onGeoLocate }) => {
           alt={weatherData.weather[0].description} 
           className="w-40 h-40 mx-auto mb-4 relative z-10" 
         />
-        <p className="text-6xl font-bold relative z-10">{Math.round(weatherData.main.temp - 273.15)}°C</p>
+        <p className="text-6xl font-bold relative z-10">{unit === 'C' ? Math.round(weatherData.main.temp - 273.15) : Math.round((weatherData.main.temp - 273.15) * 9/5 + 32)}°{unit}</p>
         <p className="text-lg mt-4 relative z-10">Today • {today}</p>
         <p className="text-lg mt-2 flex items-center justify-center relative z-10">
           <svg 
