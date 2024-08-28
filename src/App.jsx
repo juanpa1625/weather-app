@@ -4,7 +4,7 @@ import Forecast from './components/Forecast';
 import Highlights from './components/Highlights';
 import Modal from './components/Modal';
 
-const apillave = 'be729431b2120a5f3e1c64ceba987cb4';
+const API_KEY = 'be729431b2120a5f3e1c64ceba987cb4';
 
 const App = () => {
   const [weatherData, setWeatherData] = useState(null);
@@ -21,21 +21,21 @@ const App = () => {
       let geoUrl;
       if (location.includes(',')) {
         const [lat, lon] = location.split(',');
-        geoUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apillave}`;
+        geoUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
       } else {
-        geoUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apillave}`;
+        geoUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}`;
       }
   
       const geoResponse = await fetch(geoUrl);
       const geoData = await geoResponse.json();
       const { lat, lon } = geoData.coord;
   
-      const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apillave}`);
+      const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
       const weather = await weatherResponse.json();
       console.log(weather)
       setWeatherData(weather);
   
-      const forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apillave}`);
+      const forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
       const forecast = await forecastResponse.json();
       setForecastData(forecast);
     } catch (error) {
