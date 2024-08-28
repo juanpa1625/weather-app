@@ -78,24 +78,38 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      {weatherData && (
-        <CurrentWeather
-          weatherData={weatherData}
-          unit={unit}
-          onSearchClick={handleSearchClick}
-          onGeoLocate={handleGeoLocate}
+    <div className="min-h-screen bg-gray-900 text-white flex flex-col md:flex-row">
+      {/* Modal */}
+      {isModalOpen && (
+        <Modal
+          onClose={handleModalClose}
+          onSearch={handleSearch}
         />
       )}
-      {forecastData && (
-        <Forecast
-          forecastData={forecastData}
-          unit={unit}
-          onUnitChange={handleUnitChange}
-        />
-      )}
-      {weatherData && <Highlights weatherData={weatherData} />}
-      {isModalOpen && <Modal onClose={handleModalClose} onSearch={handleSearch} />}
+      
+      {/* Main Content */}
+      <div className="flex-shrink-0 flex flex-col w-full md:w-[459px] md:max-h-screen relative">
+        {weatherData && (
+          <CurrentWeather
+            weatherData={weatherData}
+            unit={unit}
+            onSearchClick={handleSearchClick}
+            onGeoLocate={handleGeoLocate}
+          />
+        )}
+      </div>
+    
+      {/* Forecast and Highlights */}
+      <div className="flex-grow flex flex-col">
+        {forecastData && (
+          <Forecast
+            forecastData={forecastData}
+            unit={unit}
+            onUnitChange={handleUnitChange}
+          />
+        )}
+        {weatherData && <Highlights weatherData={weatherData} />}
+      </div>
     </div>
   );
 }

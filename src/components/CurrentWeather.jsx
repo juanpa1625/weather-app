@@ -4,7 +4,6 @@ import { getWeatherImage } from '../utils/weatherImages';
 const CurrentWeather = ({ weatherData, onSearchClick, onGeoLocate, unit }) => {
   const weatherMain = weatherData.weather[0].main;
 
-  // Formatear la fecha en el formato "Fri, 4 June"
   const today = new Date().toLocaleDateString('en-US', {
     weekday: 'short',
     day: 'numeric',
@@ -14,11 +13,11 @@ const CurrentWeather = ({ weatherData, onSearchClick, onGeoLocate, unit }) => {
   const convertTemp = (tempK) => {
     return unit === 'C'
       ? `${Math.round(tempK - 273.15)}°C`
-      : `${Math.round((tempK - 273.15) * 9/5 + 32)}°F`;
+      : `${Math.round((tempK - 273.15) * 9 / 5 + 32)}°F`;
   };
 
   return (
-    <div className="relative flex flex-col h-screen p-4">
+    <div className="relative w-[459px] h-[1023px] p-4 bg-gray-800 flex flex-col">
       <div className="flex justify-between p-2 mb-4">
         <button 
           onClick={onSearchClick} 
@@ -57,10 +56,10 @@ const CurrentWeather = ({ weatherData, onSearchClick, onGeoLocate, unit }) => {
 
         <div className="flex-shrink-0 flex flex-col items-center justify-center p-4 rounded-lg">
           <p className="text-8xl font-bold mb-5">{convertTemp(weatherData.main.temp)}</p>
-          <p className="text-xl mb-5">{weatherMain}</p> 
+          <p className="text-xl mb-5">{weatherMain}</p>
           <p className="text-lg mb-5">Today • {today}</p>
           <p className="text-lg mt-2 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
               <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
             </svg>

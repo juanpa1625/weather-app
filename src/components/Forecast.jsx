@@ -20,7 +20,7 @@ const Forecast = ({ forecastData, unit, onUnitChange }) => {
     const date = new Date(dateString);
     
     if (index === 0) {
-      return "Mañana";
+      return "Tomorrow";
     } else {
       const nextDate = new Date();
       nextDate.setDate(date.getDate() + index);
@@ -31,34 +31,34 @@ const Forecast = ({ forecastData, unit, onUnitChange }) => {
 
   return (
     <div className="relative p-4 bg-gray-900 rounded-lg">
-      <div className="absolute top-0 right-0 flex space-x-2 ">
+      <div className="absolute top-0 right-0 flex space-x-2">
         <button 
           onClick={handleCelsiusClick} 
-          className={`w-8 h-8 rounded-full flex items-center justify-center ${unit === 'C' ? 'bg-blue-500 text-white' : 'bg-gray-500 text-gray-300'} hover:bg-blue-600`}
+          className={`w-8 h-8 rounded-full flex items-center justify-center ${unit === 'C' ? 'bg-blue-500 text-white' : 'bg-gray-500 text-gray-300'} hover:bg-blue-600 transition duration-200`}
         >
           °C
         </button>
         <button 
           onClick={handleFahrenheitClick} 
-          className={`w-8 h-8 rounded-full flex items-center justify-center ${unit === 'F' ? 'bg-blue-500 text-white' : 'bg-gray-500 text-gray-300'} hover:bg-blue-600`}
+          className={`w-8 h-8 rounded-full flex items-center justify-center ${unit === 'F' ? 'bg-blue-500 text-white' : 'bg-gray-500 text-gray-300'} hover:bg-blue-600 transition duration-200`}
         >
           °F
         </button>
       </div>
-      <div className="grid grid-cols-2 gap-4 mt-11">
-        {forecastData.list.slice(0, 5).map((item, index) => {
-          return (
-            <div key={index} className="flex flex-col items-center p-4 bg-gray-800 rounded-lg">
-              <p className="text-sm">{formatDate(item.dt_txt, index)}</p>
-              <img 
-                src={getWeatherImage(item.weather[0].main)} 
-                alt={item.weather[0].description} 
-                className="w-16 h-16 mb-2" 
-              />
-              <p className="text-sm">{`Min: ${convertTemp(item.main.temp_min)} | Max: ${convertTemp(item.main.temp_max)}`}</p>
-            </div>
-          );
-        })}
+      <div className="grid grid-cols-2 gap-2 mt-12 md:grid-cols-5 md:gap-4">
+        {forecastData.list.slice(0, 5).map((item, index) => (
+          <div key={index} className="flex flex-col items-center p-2 bg-gray-800 rounded-lg md:p-4">
+            <p className="text-xs md:text-sm mb-1 md:mb-2">{formatDate(item.dt_txt, index)}</p>
+            <img 
+              src={getWeatherImage(item.weather[0].main)} 
+              alt={item.weather[0].description} 
+              className="w-12 h-12 md:w-16 md:h-16 mb-1 md:mb-2" 
+            />
+            <p className="text-xs md:text-sm">
+              Min: {convertTemp(item.main.temp_min)} | Max: {convertTemp(item.main.temp_max)}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );
