@@ -79,7 +79,7 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-background-2 text-white flex flex-col md:flex-row">
-      {/* Modal */}
+      
       {isModalOpen && (
         <Modal
           onClose={handleModalClose}
@@ -87,7 +87,7 @@ const App = () => {
         />
       )}
       
-      {/* Main Content */}
+    
       <div className="flex-shrink-0 flex flex-col w-full md:w-[459px] md:max-h-screen relative">
         {weatherData && (
           <CurrentWeather
@@ -99,7 +99,7 @@ const App = () => {
         )}
       </div>
     
-      {/* Forecast and Highlights */}
+  
       <div className="flex-grow flex flex-col">
         {forecastData && (
           <Forecast
