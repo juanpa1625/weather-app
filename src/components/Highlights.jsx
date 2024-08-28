@@ -20,9 +20,9 @@ const Highlights = ({ weatherData }) => {
   return (
     <div className="relative p-4">
       <h2 className="text-2xl font-semibold mb-4 text-center">Today's Highlights</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 justify-items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 lg:justify-items-center">
         {/* Wind Status */}
-        <div className="bg-gray-800 p-4 rounded-lg flex flex-col items-center justify-center text-center md:w-[328px] md:h-[204px] lg:w-[328px] lg:h-[204px]">
+        <div className="bg-background-1 p-4 rounded-lg flex flex-col items-center justify-center text-center md:w-[328px] md:h-[204px] lg:w-[328px] lg:h-[204px]">
           <h3 className="text-lg mb-2">Wind Status</h3>
           <p className="text-2xl mb-2">{weatherData.wind.speed} mph</p>
           <div className="flex items-center justify-center mt-2">
@@ -43,7 +43,7 @@ const Highlights = ({ weatherData }) => {
         </div>
 
         {/* Humidity */}
-        <div className="bg-gray-800 p-4 rounded-lg flex flex-col items-center justify-center text-center md:w-[328px] md:h-[204px] lg:w-[328px] lg:h-[204px]">
+        <div className="bg-background-1 p-4 rounded-lg flex flex-col items-center justify-center text-center md:w-[328px] md:h-[204px] lg:w-[328px] lg:h-[204px]">
           <h3 className="text-lg mb-2">Humidity</h3>
           <p className="text-2xl mb-2">{humidityPercentage}%</p>
           <div className="w-full relative">
@@ -62,13 +62,13 @@ const Highlights = ({ weatherData }) => {
         </div>
 
         {/* Visibility */}
-        <div className="bg-gray-800 p-4 rounded-lg flex flex-col items-center justify-center text-center md:w-[328px] md:h-[159px] lg:w-[328px] lg:h-[159px]">
+        <div className="bg-background-1 p-4 rounded-lg flex flex-col items-center justify-center text-center md:w-[328px] md:h-[159px] lg:w-[328px] lg:h-[159px]">
           <h3 className="text-lg mb-2">Visibility</h3>
           <p className="text-2xl mb-2">{weatherData.visibility / 1000} miles</p>
         </div>
 
         {/* Air Pressure */}
-        <div className="bg-gray-800 p-4 rounded-lg flex flex-col items-center justify-center text-center md:w-[328px] md:h-[159px] lg:w-[328px] lg:h-[159px]">
+        <div className="bg-background-1 p-4 rounded-lg flex flex-col items-center justify-center text-center md:w-[328px] md:h-[159px] lg:w-[328px] lg:h-[159px]">
           <h3 className="text-lg mb-2">Air Pressure</h3>
           <p className="text-2xl mb-2">{weatherData.main.pressure} mb</p>
         </div>

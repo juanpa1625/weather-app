@@ -17,7 +17,7 @@ const CurrentWeather = ({ weatherData, onSearchClick, onGeoLocate, unit }) => {
   };
 
   return (
-    <div className="relative w-[459px] h-[1023px] p-4 bg-gray-800 flex flex-col">
+    <div className="relative w-[459px] h-[1023px] p-4 bg-background-1 flex flex-col">
       <div className="flex justify-between p-2 mb-4">
         <button 
           onClick={onSearchClick} 
@@ -43,7 +43,7 @@ const CurrentWeather = ({ weatherData, onSearchClick, onGeoLocate, unit }) => {
               backgroundImage: `url(${getWeatherImage('background')})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              opacity: 0.5,
+             
             }}
           >
             <img 

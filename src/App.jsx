@@ -78,7 +78,7 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex flex-col md:flex-row">
+    <div className="min-h-screen bg-background-2 text-white flex flex-col md:flex-row">
       {/* Modal */}
       {isModalOpen && (
         <Modal
