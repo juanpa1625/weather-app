@@ -1,4 +1,5 @@
 import React from 'react';
+import { getWeatherImage } from '../utils/weatherImages';
 
 const getWindDirection = (degrees) => {
   if (degrees > 337.5) return 'N';
@@ -24,7 +25,21 @@ const Highlights = ({ weatherData }) => {
         <div className="bg-gray-800 p-4 rounded-lg flex flex-col items-center justify-center text-center">
           <h3 className="text-lg">Wind Status</h3>
           <p className="text-2xl">{weatherData.wind.speed} mph</p>
-          <p className="text-lg">Direction: {windDirection}</p>
+          <div className="flex items-center justify-center mt-2">
+            <div
+              className="w-10 h-10 flex items-center justify-center bg-gray-700 rounded-full"
+              style={{
+                transform: `rotate(${weatherData.wind.deg}deg)`,
+              }}
+            >
+              <img
+                src={getWeatherImage('navegation')}
+                alt={`Wind direction: ${windDirection}`}
+                className="w-6 h-6"
+              />
+            </div>
+            <span className="ml-2 text-lg">{windDirection}</span>
+          </div>
         </div>
 
         {/* Humidity */}
@@ -60,6 +75,6 @@ const Highlights = ({ weatherData }) => {
       </div>
     </div>
   );
-}
+};
 
 export default Highlights;

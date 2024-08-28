@@ -28,11 +28,11 @@ const App = () => {
   
       const geoResponse = await fetch(geoUrl);
       const geoData = await geoResponse.json();
-      console.log(geoData);
       const { lat, lon } = geoData.coord;
   
       const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apillave}`);
       const weather = await weatherResponse.json();
+      console.log(weather)
       setWeatherData(weather);
   
       const forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apillave}`);
@@ -73,12 +73,16 @@ const App = () => {
     setIsModalOpen(false);
   };
 
+  const handleUnitChange = (newUnit) => {
+    setUnit(newUnit);
+  };
+
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       {weatherData && (
         <CurrentWeather
           weatherData={weatherData}
-          unit={unit} 
+          unit={unit}
           onSearchClick={handleSearchClick}
           onGeoLocate={handleGeoLocate}
         />
@@ -86,8 +90,8 @@ const App = () => {
       {forecastData && (
         <Forecast
           forecastData={forecastData}
-          unit={unit} 
-          setUnit={setUnit} 
+          unit={unit}
+          onUnitChange={handleUnitChange}
         />
       )}
       {weatherData && <Highlights weatherData={weatherData} />}

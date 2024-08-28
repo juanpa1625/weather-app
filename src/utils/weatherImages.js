@@ -11,7 +11,9 @@ const weatherImages = {
     Sleet: "/images/Sleet.png",            
     Snow: "/images/Snow.png",               
     Thunderstorm: "/images/Thunderstorm.png",
-    background:"/images/Cloud-background.png"
+    background:"/images/Cloud-background.png",
+    mylocation:"/images/location.png",
+    navegation:"/images/navegation.png"
   };
   
   export const getWeatherImage = (weatherMain) => {

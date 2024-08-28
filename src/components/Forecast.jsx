@@ -1,54 +1,64 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { getWeatherImage } from '../utils/weatherImages';
 
-const Forecast = ({ forecastData }) => {
-  const [isCelsius, setIsCelsius] = useState(true); // Estado para manejar la unidad de temperatura
-
+const Forecast = ({ forecastData, unit, onUnitChange }) => {
   const handleCelsiusClick = () => {
-    setIsCelsius(true);
+    onUnitChange('C');
   };
 
   const handleFahrenheitClick = () => {
-    setIsCelsius(false);
+    onUnitChange('F');
   };
 
   const convertTemp = (tempK) => {
-    if (isCelsius) {
-      return `${Math.round(tempK - 273.15)}°C`; // Convertir a Celsius
+    return unit === 'C'
+      ? `${Math.round(tempK - 273.15)}°C`
+      : `${Math.round((tempK - 273.15) * 9/5 + 32)}°F`;
+  };
+
+  const formatDate = (dateString, index) => {
+    const date = new Date(dateString);
+    
+    if (index === 0) {
+      return "Mañana";
     } else {
-      return `${Math.round((tempK - 273.15) * 9/5 + 32)}°F`; // Convertir a Fahrenheit
+      const nextDate = new Date();
+      nextDate.setDate(date.getDate() + index);
+      const options = { weekday: 'short', day: 'numeric', month: 'long' };
+      return nextDate.toLocaleDateString('en-US', options);
     }
   };
 
   return (
     <div className="relative p-4 bg-gray-900 rounded-lg">
-      <div className="absolute top-2 right-2 flex space-x-2">
+      <div className="absolute top-0 right-0 flex space-x-2 ">
         <button 
           onClick={handleCelsiusClick} 
-          className={`w-8 h-8 rounded-full flex items-center justify-center ${isCelsius ? 'bg-blue-500 text-white' : 'bg-gray-500 text-gray-300'} hover:bg-blue-600`}
+          className={`w-8 h-8 rounded-full flex items-center justify-center ${unit === 'C' ? 'bg-blue-500 text-white' : 'bg-gray-500 text-gray-300'} hover:bg-blue-600`}
         >
           °C
         </button>
         <button 
           onClick={handleFahrenheitClick} 
-          className={`w-8 h-8 rounded-full flex items-center justify-center ${!isCelsius ? 'bg-blue-500 text-white' : 'bg-gray-500 text-gray-300'} hover:bg-blue-600`}
+          className={`w-8 h-8 rounded-full flex items-center justify-center ${unit === 'F' ? 'bg-blue-500 text-white' : 'bg-gray-500 text-gray-300'} hover:bg-blue-600`}
         >
           °F
         </button>
       </div>
-
-      <div className="grid grid-cols-2 gap-4">
-        {forecastData.list.slice(1, 6).map((day, index) => (
-          <div key={index} className="text-center bg-gray-800 p-4 rounded-lg">
-            <p>{new Date(day.dt_txt).toLocaleDateString('en-US', { weekday: 'long' })}</p>
-            <img 
-              src={getWeatherImage(day.weather[0].main)} 
-              alt={day.weather[0].description} 
-              className="w-12 h-12 mx-auto" 
-            />
-            <p>{convertTemp(day.main.temp_min)} - {convertTemp(day.main.temp_max)}</p>
-          </div>
-        ))}
+      <div className="grid grid-cols-2 gap-4 mt-11">
+        {forecastData.list.slice(0, 5).map((item, index) => {
+          return (
+            <div key={index} className="flex flex-col items-center p-4 bg-gray-800 rounded-lg">
+              <p className="text-sm">{formatDate(item.dt_txt, index)}</p>
+              <img 
+                src={getWeatherImage(item.weather[0].main)} 
+                alt={item.weather[0].description} 
+                className="w-16 h-16 mb-2" 
+              />
+              <p className="text-sm">{`Min: ${convertTemp(item.main.temp_min)} | Max: ${convertTemp(item.main.temp_max)}`}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

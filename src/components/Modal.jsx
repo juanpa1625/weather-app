@@ -9,6 +9,14 @@ const Modal = ({ onClose, onSearch }) => {
 
   return (
     <div className="fixed inset-0 bg-gray-900 text-white flex flex-col z-50">
+      <div className="flex justify-end p-4 bg-gray-900">
+        <button 
+          onClick={onClose} 
+          className="text-white text-xl"
+        >
+          X
+        </button>
+      </div>
       <div className="flex justify-between items-center p-4 bg-gray-800">
         <input
           type="text"
@@ -22,12 +30,6 @@ const Modal = ({ onClose, onSearch }) => {
           className="bg-blue-500 p-2 rounded text-white ml-2"
         >
           Search
-        </button>
-        <button 
-          onClick={onClose} 
-          className="text-white text-xl ml-4"
-        >
-          X
         </button>
       </div>
       <div className="flex flex-col space-y-2 p-4">
